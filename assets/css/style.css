@@ -24,7 +24,8 @@ img{max-width:100%;display:block}
 .container{width:min(1100px, 92%);margin-inline:auto}
 
 /* Nav */
-.nav{position:sticky;top:0;background:rgba(11,17,24,.7);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);z-index:20}
+.nav{position:sticky;top:0;background:rgba(11,17,24,.7);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);z-index:20;transition:box-shadow .2s ease, background .2s ease}
+.nav.nav--scrolled{background:rgba(11,17,24,.85);box-shadow:0 6px 20px rgba(0,0,0,.35)}
 .nav__wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
 .brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
 .brand__logo{width:34px;height:34px;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(22,163,74,.25))}
@@ -47,7 +48,7 @@ img{max-width:100%;display:block}
 .cta{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
 .btn{display:inline-block;padding:12px 18px;border-radius:14px;text-decoration:none;font-weight:700;transition:.2s;border:1px solid transparent}
 .btn--primary{background:linear-gradient(135deg,var(--brand),#22c55e);color:#06100a}
-.btn--primary:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn--primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(34,197,94,.35)}
 .btn--ghost{background:transparent;color:var(--text);border-color:var(--border)}
 .btn--ghost:hover{background:rgba(255,255,255,.05)}
 .btn--lg{padding:14px 22px}
@@ -60,10 +61,13 @@ img{max-width:100%;display:block}
 .section{padding:72px 0;border-top:1px solid var(--border)}
 .section.alt{background:linear-gradient(180deg, rgba(255,255,255,.02), transparent)}
 .section__title{margin:0 0 26px;font-size:clamp(22px,3.5vw,34px)}
+.section__title{position:relative}
+.section__title::after{content:"";position:absolute;inset:auto 0 -10px auto;height:3px;width:120px;background:linear-gradient(90deg,var(--brand),#22c55e);border-radius:999px;opacity:.7}
 .lead{color:var(--muted)}
 
 .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.card{background:var(--card);border:1px solid var(--border);padding:22px;border-radius:18px;box-shadow:var(--shadow)}
+.card{background:var(--card);border:1px solid var(--border);padding:22px;border-radius:18px;box-shadow:var(--shadow);transition:transform .15s ease, border-color .2s ease}
+.card:hover{transform:translateY(-4px);border-color:rgba(34,197,94,.35)}
 .card__icon{font-size:26px;margin-bottom:8px}
 
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
@@ -72,8 +76,19 @@ img{max-width:100%;display:block}
 .mockup{background:var(--card);border:1px solid var(--border);padding:18px;border-radius:18px}
 
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.gallery__item{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--card)}
+.gallery__item{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--card);transition:transform .2s ease, border-color .2s ease}
+.gallery__item:hover{transform:translateY(-3px);border-color:rgba(34,197,94,.35)}
 .gallery__item img{width:100%;height:100%;object-fit:cover}
+
+/* Reveal on scroll */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
+.reveal.reveal--visible{opacity:1;transform:none}
+
+/* Lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;padding:24px;z-index:50}
+.lightbox.is-open{display:flex}
+.lightbox__img{max-width:min(92vw,1200px);max-height:80vh;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.6);border:1px solid var(--border)}
+.lightbox__close{position:absolute;top:14px;left:14px;background:rgba(255,255,255,.08);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer}
 
 /* FAQ */
 .faq details{background:var(--card);border:1px solid var(--border);padding:16px 18px;border-radius:14px;margin:10px 0}
@@ -89,6 +104,11 @@ img{max-width:100%;display:block}
 .footer__links a:hover{color:var(--text)}
 .footer .social{gap:12px}
 .footer .social__link{width:38px;height:38px}
+
+/* To top button */
+.to-top{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--text);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:40;box-shadow:var(--shadow)}
+.to-top.is-visible{display:flex}
+.to-top:hover{background:rgba(22,163,74,.15);color:#c9ffd7}
 
 /* Responsive */
 @media (max-width: 900px){
